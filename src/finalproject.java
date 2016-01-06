@@ -1,5 +1,6 @@
-Expression project.licensePath is undefined on line 4, column 14 in Templates/Classes/Class_1.java.
 
+
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import javax.swing.JComponent;
@@ -15,7 +16,7 @@ public class finalproject extends JComponent{
 
     // Height and Width of our game
     static final int WIDTH = 800;
-    static final int HEIGHT = 600;
+    static final int HEIGHT = 900;
     
     // sets the framerate and delay for our game
     // you just need to select an approproate framerate
@@ -32,8 +33,17 @@ public class finalproject extends JComponent{
     {
         // always clear the screen first!
         g.clearRect(0, 0, WIDTH, HEIGHT);
-        
+        Color ground=new Color(232,205,190);
         // GAME DRAWING GOES HERE 
+        //set color to yellow 
+        g.setColor(Color.yellow);
+        g.fillRect(60, 795, 50, 50);
+        //make ground 
+        g.setColor(Color.GREEN);
+        g.drawRect(0, 847, 800, 1);
+        g.setColor(ground);
+        g.fillRect(0, 850, 800, 50);
+        
         
         
         // GAME DRAWING ENDS HERE
