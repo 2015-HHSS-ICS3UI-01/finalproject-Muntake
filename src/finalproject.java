@@ -37,6 +37,7 @@ public class finalproject extends JComponent{
         // GAME DRAWING GOES HERE 
         //set color to yellow 
         g.setColor(Color.yellow);
+        //draw the flappy cube 
         g.fillRect(60, 795, 50, 50);
         //make ground 
         g.setColor(Color.GREEN);
