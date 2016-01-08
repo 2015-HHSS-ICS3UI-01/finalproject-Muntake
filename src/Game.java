@@ -98,7 +98,7 @@ public class Game extends JComponent implements KeyListener, MouseMotionListener
             //gravity pulling player down
             movey = movey + gravity;
             //jumping 
-            if (jump && !inair) {
+            if (jump && !inair&&!pjump) {
                 //make a big change in y direction
                 movey = -20;
                 inair = true;
@@ -156,7 +156,7 @@ public class Game extends JComponent implements KeyListener, MouseMotionListener
         frame.pack();
         // shows the window to the user
         frame.setVisible(true);
-        
+        frame.addKeyListener(game);
         // starts my game loop
         game.run();
     }
