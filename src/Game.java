@@ -21,8 +21,8 @@ import javax.swing.JFrame;
 public class Game extends JComponent implements KeyListener, MouseMotionListener, MouseListener { 
 
     // Height and Width of our game
-    static final int WIDTH = 800;
-    static final int HEIGHT = 900;
+    static final int WIDTH = 600;
+    static final int HEIGHT = 700;
     
     // sets the framerate and delay for our game
     // you just need to select an approproate framerate
@@ -31,7 +31,10 @@ public class Game extends JComponent implements KeyListener, MouseMotionListener
     
     
     //create player 
-     Rectangle player = new Rectangle(60, 795, 50, 50);
+     Rectangle player = new Rectangle(60, 595, 50, 50);
+     //create pipe 
+     Rectangle top=new Rectangle(300,0,100,200);
+     Rectangle bottom=new Rectangle(300,500,100,647-500);
      //ceate a integer for the y value 
      int movey=0;
      //create gravity integer 
@@ -41,7 +44,7 @@ public class Game extends JComponent implements KeyListener, MouseMotionListener
     
     //create jump variable (keyboard variables)
     boolean jump=false;
-    boolean inair=false;
+    
     //previous jump boolean 
     boolean pjump=false;
     
@@ -63,9 +66,15 @@ public class Game extends JComponent implements KeyListener, MouseMotionListener
         g.fillRect(player.x, player.y, player.width,player.height);        
         //make ground
         g.setColor(Color.GREEN);
-        g.drawRect(0, 847, 800, 1);
+        g.drawRect(0, 647, 600, 1);
         g.setColor(ground);
-        g.fillRect(0, 850, 800, 50);
+        g.fillRect(0, 650, 600, 50);
+        //fill top pipe 
+            g.setColor(Color.GREEN);
+        g.fillRect(top.x, top.y, top.width,top.height );
+        //draw the bottom pipe 
+        g.fillRect(bottom.x, bottom.y, bottom.width, bottom.height);
+        
         
         
         
@@ -96,21 +105,22 @@ public class Game extends JComponent implements KeyListener, MouseMotionListener
              
             
             //gravity pulling player down
-            movey = movey + gravity;
+            movey = movey + gravity; 
             //jumping 
-            if (jump && !inair&&!pjump) {
+            if (jump && !pjump) {
                 //make a big change in y direction
-                movey = -20;
-                inair = true;
+                movey = -15;
+                pjump=true;
+               
             }
                 
                 //move player in y direction 
                  player.y = player.y + movey;
             //if feet of playet become lower than floor
-            if (player.y + player.height > 847) {
-                player.y = 847 - player.height;
+            if (player.y + player.height > 647) {
+                player.y = 647 - player.height;
                 movey = 0;
-                inair = false;
+              
             }
             // GAME LOGIC ENDS HERE 
             
@@ -180,6 +190,7 @@ public class Game extends JComponent implements KeyListener, MouseMotionListener
          int key = e.getKeyCode();
         if(key==KeyEvent.VK_SPACE){
             jump=false;
+            pjump=false;
         }
     }
 
