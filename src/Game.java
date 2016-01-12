@@ -123,7 +123,7 @@ public class Game extends JComponent implements KeyListener, MouseMotionListener
               
             }
             // GAME LOGIC ENDS HERE 
-            
+            //
             // update the drawing (calls paintComponent)
             repaint();
             
