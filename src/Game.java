@@ -28,24 +28,37 @@ public class Game extends JComponent implements KeyListener, MouseMotionListener
     // you just need to select an approproate framerate
     long desiredFPS = 60;
     long desiredTime = (1000)/desiredFPS;
-    
-    
+    //create a int to stote the first pipe x value 
+    int x=300;
     //create player 
      Rectangle player = new Rectangle(60, 595, 50, 50);
-     //create pipe 
+     //create top pipes
      Rectangle top=new Rectangle(300,0,100,200);
+     Rectangle top2=new Rectangle(x,0,100,500);
+     Rectangle top3=new Rectangle(x,0,100,100);
+  
+     
+     
+     
+     
+     
+     
+     
+     
+     //create bottom of pipes 
      Rectangle bottom=new Rectangle(300,500,100,647-500);
+     Rectangle bottom2=new Rectangle(x,200,100,647-200);
+     Rectangle bottom3=new Rectangle(x,500,100,647-500);
+     
+     
+     
      //ceate a integer for the y value 
-     int movey=0;
+    int movey=0;
      //create gravity integer 
      int gravity=1;
-    
-    
-    
-    //create jump variable (keyboard variables)
+   //create jump variable (keyboard variables)
     boolean jump=false;
-    
-    //previous jump boolean 
+   //previous jump boolean 
     boolean pjump=false;
     
 
@@ -72,8 +85,8 @@ public class Game extends JComponent implements KeyListener, MouseMotionListener
         //fill top pipe 
             g.setColor(Color.GREEN);
         g.fillRect(top.x, top.y, top.width,top.height );
-        //draw the bottom pipe 
         g.fillRect(bottom.x, bottom.y, bottom.width, bottom.height);
+        
         
         
         
