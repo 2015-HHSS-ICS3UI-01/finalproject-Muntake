@@ -9,6 +9,8 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
@@ -30,27 +32,10 @@ public class Game extends JComponent implements KeyListener, MouseMotionListener
     long desiredTime = (1000)/desiredFPS;
     //create a int to stote the first pipe x value 
     int x=300;
+     ArrayList<Rectangle> blocks = new ArrayList<>();
+    
     //create player 
      Rectangle player = new Rectangle(60, 595, 50, 50);
-     //create top pipes
-     Rectangle top=new Rectangle(300,0,100,200);
-     Rectangle top2=new Rectangle(x,0,100,500);
-     Rectangle top3=new Rectangle(x,0,100,100);
-  
-     
-     
-     
-     
-     
-     
-     
-     
-     //create bottom of pipes 
-     Rectangle bottom=new Rectangle(300,500,100,647-500);
-     Rectangle bottom2=new Rectangle(x,200,100,647-200);
-     Rectangle bottom3=new Rectangle(x,500,100,647-500);
-     
-     
      
      //ceate a integer for the y value 
     int movey=0;
@@ -73,6 +58,14 @@ public class Game extends JComponent implements KeyListener, MouseMotionListener
         g.clearRect(0, 0, WIDTH, HEIGHT);
         Color ground=new Color(232,205,190);
         // GAME DRAWING GOES HERE 
+        g.setColor(Color.GREEN);
+         for(Rectangle block: blocks){
+            // draw the block
+            g.fillRect(block.x, block.y, block.width, block.height);
+        
+         }
+        
+        
         //set color to yellow 
         g.setColor(Color.yellow);
         //draw the flappy cube 
@@ -81,23 +74,39 @@ public class Game extends JComponent implements KeyListener, MouseMotionListener
         g.setColor(Color.GREEN);
         g.drawRect(0, 647, 600, 1);
         g.setColor(ground);
-        g.fillRect(0, 650, 600, 50);
-        //fill top pipe 
-            g.setColor(Color.GREEN);
-        g.fillRect(top.x, top.y, top.width,top.height );
-        g.fillRect(bottom.x, bottom.y, bottom.width, bottom.height);
+     
+       
         
-        
-        
-        
-        
-        // GAME DRAWING ENDS HERE
+       
+           
+            
+            
+            
+   // GAME DRAWING ENDS HERE
     }
     
     
     // The main game loop
     // In here is where all the logic for my game will go
     public void run(){
+        //do intail things 
+        blocks.add(new Rectangle(500,0,100,200));
+        blocks.add(new Rectangle(1000,0,100,400));
+        blocks.add(new Rectangle(1500,0,100,100));
+        blocks.add(new Rectangle(2000,0,100,300));
+        blocks.add(new Rectangle(2500,0,100,350));
+        blocks.add(new Rectangle(3000,0,100,100));
+        
+         blocks.add(new Rectangle(500,400,100,647-400));
+         blocks.add(new Rectangle(1000,600,100,647-600));
+         blocks.add(new Rectangle(1500,300,100,647-300));
+         blocks.add(new Rectangle(2000,500,100,647-500));
+         blocks.add(new Rectangle(2500,550,100,647-550));
+         blocks.add(new Rectangle(3000,300,100,647-300));
+        
+      
+        
+        //end initail things 
     
         // Used to keep track of time used to draw and update the game
         // This is used to limit the framerate later on
@@ -134,7 +143,23 @@ public class Game extends JComponent implements KeyListener, MouseMotionListener
                 player.y = 647 - player.height;
                 movey = 0;
               
+                
+                
             }
+            
+             // go through all blocks and decrase the x value by 5 (moving function)
+            for(Rectangle block: blocks){
+                block.x=block.x-5;
+            }
+            Rectangle2D block = null;
+            
+            if(player.intersects(block)){
+                Rectangle intersection = player.intersection(block);
+            }
+                    
+                    
+            
+            
             // GAME LOGIC ENDS HERE 
             //
             // update the drawing (calls paintComponent)
