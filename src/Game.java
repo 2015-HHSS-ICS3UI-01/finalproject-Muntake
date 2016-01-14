@@ -2,6 +2,7 @@
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
@@ -35,16 +36,21 @@ public class Game extends JComponent implements KeyListener, MouseMotionListener
      ArrayList<Rectangle> blocks = new ArrayList<>();
     
     //create player 
-     Rectangle player = new Rectangle(60, 595, 50, 50);
+     Rectangle player = new Rectangle(60, 597, 50, 50);
      
      //ceate a integer for the y value 
     int movey=0;
      //create gravity integer 
      int gravity=1;
+     int thispipe=0;
+     int counter=0;
    //create jump variable (keyboard variables)
-    boolean jump=false;
+    boolean jump=false;        
    //previous jump boolean 
     boolean pjump=false;
+    boolean done = false; 
+    //create new font
+    Font newFont= new Font("Helvetica",Font.BOLD,50);
     
 
     
@@ -74,6 +80,13 @@ public class Game extends JComponent implements KeyListener, MouseMotionListener
         g.setColor(Color.GREEN);
         g.drawRect(0, 647, 600, 1);
         g.setColor(ground);
+        g.setColor(Color.black);
+        if(done){
+            //set new font created 
+            g.setFont(newFont);
+           g.drawString("GAMEOVER",player.x,player.y);
+        }
+             
      
        
         
@@ -115,7 +128,7 @@ public class Game extends JComponent implements KeyListener, MouseMotionListener
          
         // the main game loop section
         // game will end if you set done = false;
-        boolean done = false; 
+        
         while(!done)
         {
             // determines when we started so we can keep a framerate
@@ -150,12 +163,34 @@ public class Game extends JComponent implements KeyListener, MouseMotionListener
              // go through all blocks and decrase the x value by 5 (moving function)
             for(Rectangle block: blocks){
                 block.x=block.x-5;
+                thispipe=thispipe-5;
+                System.out.println(counter);
+                if (thispipe==-500){
+                    thispipe=0;
+                }     
+                 
+                
+                
+                
             }
-            Rectangle2D block = null;
+             
+             for(Rectangle block: blocks){
+                
+                if(player.intersects(block)){
+                 player.y=597;
+                    done = true;
+                    
+                }
+            }
+           
             
-            if(player.intersects(block)){
-                Rectangle intersection = player.intersection(block);
-            }
+            
+            
+            
+            
+           
+               
+                
                     
                     
             
@@ -181,8 +216,9 @@ public class Game extends JComponent implements KeyListener, MouseMotionListener
                 }catch(Exception e){};
             }
         
+    }    
     }
-    }   
+    
     
     /**
      * @param args the command line arguments
